@@ -14,7 +14,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 @Getter
 @Setter
 @Entity
@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Email
     @NotBlank(message = "email cannot be empty")
     private String email;
-    @NotNull
+
     @NotBlank(message = "password cannot be empty")
     private String password;
     private int dni;
