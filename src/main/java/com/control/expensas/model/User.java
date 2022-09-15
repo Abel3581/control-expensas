@@ -27,6 +27,7 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     @Email
+    @NotBlank(message = "email cannot be empty")
     private String email;
     @NotNull
     @NotBlank(message = "password cannot be empty")
