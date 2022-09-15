@@ -1,6 +1,6 @@
 package com.control.expensas.config.utils;
 
-import com.control.expensas.rest.request.ErrorResponse;
+import com.control.expensas.model.rest.request.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

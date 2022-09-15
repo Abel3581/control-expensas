@@ -1,4 +1,4 @@
-package com.control.expensas.rest.request;
+package com.control.expensas.model.rest.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
