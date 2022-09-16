@@ -35,7 +35,7 @@ public class UserServiceImpl implements AuthService {
 
     private AuthenticationManager authenticationManager;
     @Override
-    public UserRegisterResponse register(UserRegisterRequest request) {
+    public UserRegisterResponse save(UserRegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()) != null)
             throw new UserAlreadyExistException("Email address: " + request.getEmail() + " is already being used.");
         User user = userMapper.entityToDto(request);
