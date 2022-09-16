@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,15 +26,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String name;
-    private String surname;
-    @Email
-    @NotBlank(message = "email cannot be empty")
+    private String surname;@Email(message = "Must be a valid email.")
+    @NotBlank(message = "Email cannot be null or empty.")
     private String email;
-
-    @NotBlank(message = "password cannot be empty")
+    @Size(min = 6, max = 8, message = "Password must be between 6 and 8 characters.")
+    @NotBlank(message = "Password cannot be null or empty.")
     private String password;
     private int dni;
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "role_id")
     private Role role;

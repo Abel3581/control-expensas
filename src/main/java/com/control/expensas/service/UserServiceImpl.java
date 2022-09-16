@@ -2,17 +2,23 @@ package com.control.expensas.service;
 
 import com.control.expensas.config.utils.JwtUtil;
 import com.control.expensas.enums.RoleEnum;
+import com.control.expensas.exception.InvalidCredentialsException;
 import com.control.expensas.exception.UserAlreadyExistException;
 import com.control.expensas.mapper.UserMapper;
 import com.control.expensas.model.Role;
 import com.control.expensas.model.User;
+import com.control.expensas.model.dto.request.LoginRequest;
 import com.control.expensas.model.dto.request.UserRegisterRequest;
+import com.control.expensas.model.dto.response.LoginResponse;
 import com.control.expensas.model.dto.response.UserRegisterResponse;
 import com.control.expensas.repository.RoleRepository;
 import com.control.expensas.repository.UserRepository;
 import com.control.expensas.service.abstraction.AuthService;
 import com.control.expensas.service.abstraction.RoleService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +32,8 @@ public class UserServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private final RoleService roleService;
     private final UserMapper userMapper;
+
+    private AuthenticationManager authenticationManager;
     @Override
     public UserRegisterResponse register(UserRegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()) != null)
@@ -45,6 +53,33 @@ public class UserServiceImpl implements AuthService {
         UserRegisterResponse response = userMapper.dtoToEntity(userCreate);
         response.setToken(jwtUtil.generateToken(userCreate));
         return response;
+    }
+
+    @Override
+    public LoginResponse login(LoginRequest request) {
+        authenticate(request);
+        User user = getUserBy(request.getEmail());
+        LoginResponse response = userMapper.dtoLoginResponse(user);
+        response.setToken(jwtUtil.generateToken(user));
+        return response;
+    }
+
+    private User getUserBy(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null)
+            throw new UsernameNotFoundException("User not found");
+        return user;
+    }
+
+    private void authenticate(LoginRequest request) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    request.getEmail(),
+                    request.getPassword()
+            ));
+        }catch (Exception e){
+            throw new InvalidCredentialsException("Invalid email or password.");
+        }
     }
 
 
