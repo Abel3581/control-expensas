@@ -51,9 +51,11 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                //Auth
                 .antMatchers(HttpMethod.POST,"/auth/register")
                 .permitAll()
-
+                .antMatchers(HttpMethod.POST,"/auth/login")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
