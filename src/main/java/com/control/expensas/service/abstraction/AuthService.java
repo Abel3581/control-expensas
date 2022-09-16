@@ -6,7 +6,7 @@ import com.control.expensas.model.dto.response.LoginResponse;
 import com.control.expensas.model.dto.response.UserRegisterResponse;
 
 public interface AuthService {
-    UserRegisterResponse register(UserRegisterRequest request);
+    UserRegisterResponse save(UserRegisterRequest request);
 
     LoginResponse login(LoginRequest request);
 }
