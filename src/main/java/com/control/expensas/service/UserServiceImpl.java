@@ -11,10 +11,10 @@ import com.control.expensas.model.dto.request.LoginRequest;
 import com.control.expensas.model.dto.request.UserRegisterRequest;
 import com.control.expensas.model.dto.response.LoginResponse;
 import com.control.expensas.model.dto.response.UserRegisterResponse;
-import com.control.expensas.repository.RoleRepository;
 import com.control.expensas.repository.UserRepository;
 import com.control.expensas.service.abstraction.AuthService;
 import com.control.expensas.service.abstraction.RoleService;
+import com.control.expensas.service.abstraction.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,10 +24,10 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-public class UserServiceImpl implements AuthService {
+public class UserServiceImpl implements AuthService, UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final RoleService roleService;
@@ -64,7 +64,7 @@ public class UserServiceImpl implements AuthService {
         return response;
     }
 
-    private User getUserBy(String email) {
+    public User getUserBy(String email) {
         User user = userRepository.findByEmail(email);
         if(user == null)
             throw new UsernameNotFoundException("User not found");
