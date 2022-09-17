@@ -3,6 +3,7 @@ package com.control.expensas.config;
 import com.control.expensas.config.filters.CustomAccessDeniedHandler;
 import com.control.expensas.config.filters.CustomAuthenticationEntryPoint;
 import com.control.expensas.config.filters.JwtRequestFilter;
+import com.control.expensas.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
