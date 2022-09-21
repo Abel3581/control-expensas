@@ -1,16 +1,14 @@
 package com.control.expensas.model.dto.request;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 public class UserRegisterRequest {
 

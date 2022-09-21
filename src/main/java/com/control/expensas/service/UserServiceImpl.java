@@ -37,7 +37,7 @@ public class UserServiceImpl implements AuthService, UserService {
     @Override
     public UserRegisterResponse save(UserRegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()) != null)
-            throw new UserAlreadyExistException("Email address: " + request.getEmail() + " is already being used.");
+            throw new UserAlreadyExistException("Email already exist.");
         User user = userMapper.entityToDto(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         Role role ;
