@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
+    private List<Receipt> receipts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
