@@ -50,7 +50,7 @@ public class UserRegisterIntegrationTest extends AbstractBaseIntegrationTest {
 
       Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
       Assert.assertEquals(Objects.requireNonNull(response.getBody()).getEmail(), request.getEmail());
-        Assert.assertTrue(jwtUtil.isValidToken(response.getBody().getToken()));
+      Assert.assertTrue(jwtUtil.isValidToken(response.getBody().getToken()));
   }
 
 }

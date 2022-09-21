@@ -1,4 +1,4 @@
 package com.control.expensas.model;
 
-public class Receipet {
+public class Receipt {
 }
