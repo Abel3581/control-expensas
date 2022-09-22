@@ -2,8 +2,7 @@ package com.control.expensas.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Builder
@@ -18,7 +17,8 @@ public class Payment {
     private Long paymentId;
     private LocalDate date;// fecha
     private double amount; // monto
-    private Department department;
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn ( name = "userId")
     private User owner; // propietario
 
 }

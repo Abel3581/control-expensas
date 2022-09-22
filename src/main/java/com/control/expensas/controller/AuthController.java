@@ -23,7 +23,6 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-
     public ResponseEntity<UserRegisterResponse> save(@RequestBody @Valid  UserRegisterRequest request){
         UserRegisterResponse response = authService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
