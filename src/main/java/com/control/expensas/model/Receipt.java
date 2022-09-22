@@ -2,10 +2,7 @@ package com.control.expensas.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Builder
@@ -17,6 +14,8 @@ import java.time.LocalDate;
 @Table(name = "TB_RECEIPT")
 public class Receipt {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receiptId;
 
     private LocalDate date;
