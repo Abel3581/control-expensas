@@ -21,7 +21,7 @@ public class ResponseUtils {
     private static ErrorResponse getGenericErrorResponse() {
         return ErrorResponse.builder()
                 .statusCode(HttpStatus.FORBIDDEN.value())
-                .message("Access denied. Please, try to login again or conctact your admin.")
+                .message("Access denied. Please, try to login again or contact your admin.")
                 .build();
     }
 }
