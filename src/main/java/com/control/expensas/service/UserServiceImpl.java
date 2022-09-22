@@ -16,11 +16,13 @@ import com.control.expensas.service.abstraction.AuthService;
 import com.control.expensas.service.abstraction.RoleService;
 import com.control.expensas.service.abstraction.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @AllArgsConstructor
 @Service
@@ -48,6 +50,10 @@ public class UserServiceImpl implements AuthService, UserService {
         if(request.getRole() == 2){
             role = roleService.findBy(RoleEnum.ROLE_DUTY_MANAGER);
             user.setRole(role);
+        }
+        if(request.getRole() !=2 && request.getRole() != 1){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Role not found");
         }
         User userCreate = userRepository.save(user);
         UserRegisterResponse response = userMapper.dtoToEntity(userCreate);

@@ -20,6 +20,10 @@ public class Receipt {
 
     private LocalDate date;
 
+    private double amount; // monto
+
+    private String nameInCharge; // nombre del encargado
+
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;// propietario
 }
