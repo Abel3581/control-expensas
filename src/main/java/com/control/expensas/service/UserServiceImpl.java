@@ -63,14 +63,12 @@ public class UserServiceImpl implements AuthService, UserService {
         response.setToken(jwtUtil.generateToken(user));
         return response;
     }
-
     public User getUserBy(String email) {
         User user = userRepository.findByEmail(email);
         if(user == null)
             throw new UsernameNotFoundException("User not found");
         return user;
     }
-
     private void authenticate(LoginRequest request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(

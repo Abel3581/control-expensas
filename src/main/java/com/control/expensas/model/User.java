@@ -1,4 +1,5 @@
 package com.control.expensas.model;
+import com.control.expensas.enums.RoleEnum;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,6 +37,16 @@ public class User implements UserDetails {
     private Role role;
 
     private List<Receipt> receipts;
+
+    public User(Long userId, String name, String surname, String email, String password, int dni, Role role) {
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
