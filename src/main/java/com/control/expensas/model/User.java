@@ -36,17 +36,12 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Receipt> receipts;
 
-    public User(Long userId, String name, String surname, String email, String password, int dni, Role role) {
-        this.userId = userId;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.dni = dni;
-        this.role = role;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Department department;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -78,5 +73,16 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User(Long userId, String name, String surname, String email, String password, int dni, Role role) {
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+        this.role = role;
+    }
+
 
 }
